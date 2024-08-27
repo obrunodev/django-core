@@ -5,9 +5,29 @@
 {% block title %}{{ task.name }}{% endblock title %}
 
 {% block content %}
-    <a href="{% url 'tasks:update' task.id %}">{% trans "Update" %}</a>
-    <a href="{% url 'tasks:delete' task.id %}">{% trans "Delete" %}</a>
-    <h1>{{ task.name }}</h1>
-    <p>{{ task.description }}</p>
-    <p>Completed: {{ task.completed }}</p>
+    <div class="card mt-5">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1>{{ task.name }}</h1>
+                <a href="{% url 'tasks:update' task.id %}" class="btn btn-primary">
+                    {% trans "Edit" %}
+                    <i class="bi bi-pencil-square"></i>
+                </a>
+            </div>
+        </div>
+        <div class="card-body">
+            <h1>{{ task.name }}</h1>
+            <p>{{ task.description }}</p>
+            <p>Completed: {{ task.completed }}</p>
+        </div>
+        <div class="card-footer">
+            <div class="d-flex justify-content-between align-items-center">
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success">{% trans "Complete" %} <i class="bi bi-check-lg"></i></button>
+                </form>
+                <a href="{% url 'tasks:delete' task.id %}" class="btn btn-danger">{% trans "Delete" %} <i class="bi bi-trash"></i></a>
+            </div>
+        </div>
+    </div>
 {% endblock content %}

@@ -10,7 +10,7 @@
         <div class="card-body">
             <form method="post">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {% include "partials/form.html" with form=form %}
                 <button type="submit" class="btn btn-primary mt-2">Register</button>
             </form>
             <a href="{% url 'users:login' %}">Login</a>

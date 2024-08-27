@@ -6,12 +6,16 @@
 
 {% block content %}
 
-    <h1>{% trans "Update Task" %}</h1>
-
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="{% trans "Update" %}" />
-    </form>
+    <div class="card mt-5">
+        <div class="card-body">
+            <h1>{% trans "Update Task" %}</h1>
+        
+            <form method="post">
+                {% csrf_token %}
+                {% include "partials/form.html" with form=form %}
+                <input type="submit" class="btn btn-primary mt-2" value="{% trans "Update" %}">
+            </form>
+        </div>
+    </div>
 
 {% endblock content %}

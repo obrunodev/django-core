@@ -6,16 +6,31 @@
 
 {% block content %}
 
-    <h1>{% trans "Tasks" %}</h1>
+    <h1 class="my-3">{% trans "Tasks" %}</h1>
 
     {% include "partials/messages.html" %}
     
-    <a href="{% url 'tasks:create' %}">{% trans "Create Task" %}</a>
+    <a href="{% url 'tasks:create' %}" class="btn btn-primary mb-2">{% trans "Create Task" %}</a>
 
-    <ul>
-        {% for task in tasks %}
-            <li><a href="{% url 'tasks:detail' task.id %}">{{ task.name }}</a></li>
-        {% endfor %}
-    </ul>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">{% trans "Name" %}</th>
+                <th scope="col">{% trans "Description" %}</th>
+                <th scope="col">{% trans "Completed" %}</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task.name }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.completed }}</td>
+                    <td><a href="{% url 'tasks:detail' task.id %}" class="btn btn-primary btn-sm">{% trans "View" %}</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock content %}

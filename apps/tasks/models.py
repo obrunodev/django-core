@@ -5,8 +5,8 @@ from django.db import models
 
 class Task(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    description = models.TextField()
+    name = models.CharField('Task name', max_length=255)
+    description = models.TextField('Description', blank=True, null=True)
     completed = models.BooleanField(default=False)
 
     class Meta:
