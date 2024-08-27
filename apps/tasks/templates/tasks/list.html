@@ -8,6 +8,8 @@
 
     <h1>{% trans "Tasks" %}</h1>
 
+    {% include "partials/messages.html" %}
+    
     <a href="{% url 'tasks:create' %}">{% trans "Create Task" %}</a>
 
     <ul>
