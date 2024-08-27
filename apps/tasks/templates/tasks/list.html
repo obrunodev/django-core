@@ -1,0 +1,19 @@
+{% extends "layout/base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Tasks" %}{% endblock title %}
+
+{% block content %}
+
+    <h1>{% trans "Tasks" %}</h1>
+
+    <a href="{% url 'tasks:create' %}">{% trans "Create Task" %}</a>
+
+    <ul>
+        {% for task in tasks %}
+            <li><a href="{% url 'tasks:detail' task.id %}">{{ task.name }}</a></li>
+        {% endfor %}
+    </ul>
+
+{% endblock content %}

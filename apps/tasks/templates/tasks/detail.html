@@ -1,0 +1,13 @@
+{% extends "layout/base.html" %}
+
+{% load i18n %}
+
+{% block title %}{{ task.name }}{% endblock title %}
+
+{% block content %}
+    <a href="{% url 'tasks:update' task.id %}">{% trans "Update" %}</a>
+    <a href="{% url 'tasks:delete' task.id %}">{% trans "Delete" %}</a>
+    <h1>{{ task.name }}</h1>
+    <p>{{ task.description }}</p>
+    <p>Completed: {{ task.completed }}</p>
+{% endblock content %}

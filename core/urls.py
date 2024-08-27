@@ -8,6 +8,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('users/', include('apps.users.urls')),
     path('admin/', admin.site.urls),
+    path('tasks/', include('apps.tasks.urls')),
 ]
 
 if settings.DEBUG:
