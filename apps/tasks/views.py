@@ -2,7 +2,9 @@ from apps.tasks.forms import TaskForm
 from apps.tasks.models import Task
 from apps.tasks.mixins import UserIsOwnerMixin
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
@@ -55,4 +57,21 @@ class TaskDeleteView(UserIsOwnerMixin, DeleteView):
         response = super().form_valid(form)
         messages.success(self.request, 'Task deleted successfully.')
         return response
-    
+
+
+@login_required
+def finish_task(request, task_id):
+    task = get_object_or_404(Task, pk=task_id)
+    task.completed = True
+    task.save()
+    messages.success(request, 'Task finished successfully.')
+    return redirect('tasks:detail', task_id)
+
+
+@login_required
+def unfinish_task(request, task_id):
+    task = get_object_or_404(Task, pk=task_id)
+    task.completed = False
+    task.save()
+    messages.success(request, 'Task unfinished.')
+    return redirect('tasks:detail', task_id)
